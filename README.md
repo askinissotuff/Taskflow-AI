@@ -4,7 +4,7 @@
 
 TaskFlow AI is a lightweight task and project organizer that runs in your browser. It is designed for people who want a clear place to capture tasks, set priorities, track due dates, and see progress without a complicated setup.
 
-> **Current status:** Public browser-based MVP. The app supports task and project management, browser-local persistence, search, filters, progress summaries, and JSON backup/restore. It does not currently provide accounts, cloud synchronization, shared workspaces, notifications, or a connected AI model.
+> **Current status:** Public browser-based MVP. The app supports task and project management, browser-local persistence, search, filters, progress summaries, and JSON backup/restore. It does not currently provide accounts, cloud synchronization, shared workspaces, notifications, or a connected AI model. Its free planning helper runs locally in your browser.
 
 ## Live website
 
@@ -21,7 +21,7 @@ The site is deployed through GitHub Pages from the `main` branch.
 - Filter tasks by all, active, or completed status.
 - Create projects and track their completion progress.
 - Review workspace totals and completion rate.
-- Generate a sample planning checklist from a goal.
+- Generate a practical, free planning checklist from a goal directly in your browser. No API key, account, or paid AI service is needed.
 - Export your workspace to a JSON backup and import it later.
 - Use a responsive layout on desktop and mobile.
 
@@ -46,7 +46,7 @@ To run the app locally:
 
 Tasks and projects are stored in local storage in the browser on the device you are using. They are not uploaded to a TaskFlow account and do not automatically sync between devices. Export a JSON backup before clearing browser data or changing devices. Imported backups replace the current workspace after confirmation.
 
-Do not enter sensitive, confidential, or highly personal information. The planning helper currently uses a fixed template and does not send your goal to an AI service. The page loads its typography from Google Fonts when an internet connection is available.
+Do not enter sensitive, confidential, or highly personal information. The planning helper runs locally and does not send your goal or task list to an AI provider. The page loads its typography from Google Fonts when an internet connection is available.
 
 ## Project structure
 
@@ -63,13 +63,9 @@ Taskflow-AI/
 └── package.json          # Test scripts and project metadata
 ```
 
-## Enable the AI planner
+## Free planning helper
 
-Follow [AI setup](docs/AI_SETUP.md) to deploy the secure Claude API on Vercel. Until that backend is deployed and configured, the GitHub Pages site cannot generate live AI plans.
-
-## Product direction
-
-The Claude-powered planning API is implemented in api/plan.js and is designed for Vercel serverless deployment. The current GitHub Pages site remains a static deployment and cannot run this API. To enable live AI, deploy the repository to Vercel and set ANTHROPIC_API_KEY as a server-side environment variable. Never put the key in app.js or commit it. Anthropic API usage is billed separately from a Claude chat subscription. See docs/AI_SETUP.md for setup and privacy details. Secure accounts, cloud persistence, and collaboration remain future work.
+The planning helper creates editable task suggestions locally in your browser. It does not call Claude or any external AI service, so there are no API fees or keys to configure. Secure accounts, cloud persistence, collaboration, and an optional connected AI provider remain future work.
 
 See [Product Spec](docs/PRODUCT_SPEC.md), [Architecture](docs/ARCHITECTURE.md), [Roadmap](docs/ROADMAP.md), and [User Guide](docs/USER_GUIDE.md).
 
