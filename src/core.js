@@ -22,7 +22,7 @@
 
   function createTask(input, id) {
     var title = String(input.title || "").trim();
-    if (!title) throw new Error("A task title is required.");
+    if (!title) throw new Error("A task title is required.");\n    if (!isValidDueDate(input.dueDate || "")) throw new Error("Enter a valid due date.");
     return {
       id: id,
       title: title.slice(0, 100),
@@ -34,7 +34,7 @@
     };
   }
 
-  function makePlan(goal) {
+  function isValidDueDate(value) {\n    if (!value) return true;\n    if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(value)) return false;\n    var date = new Date(value + "T00:00:00");\n    return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;\n  }\n\n  function makePlan(goal) {
     var cleanGoal = String(goal || "").trim();
     if (!cleanGoal) return [];
     return [
@@ -45,7 +45,7 @@
     ];
   }
 
-  var api = { completionRate: completionRate, filterTasks: filterTasks, projectProgress: projectProgress, createTask: createTask, makePlan: makePlan };
+  var api = { completionRate: completionRate, filterTasks: filterTasks, projectProgress: projectProgress, createTask: createTask, makePlan: makePlan, isValidDueDate: isValidDueDate };
   root.TaskFlowCore = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof globalThis !== "undefined" ? globalThis : this);
