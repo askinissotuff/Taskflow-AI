@@ -63,9 +63,13 @@ Taskflow-AI/
 └── package.json          # Test scripts and project metadata
 ```
 
+## Enable the AI planner
+
+Follow [AI setup](docs/AI_SETUP.md) to deploy the secure Claude API on Vercel. Until that backend is deployed and configured, the GitHub Pages site cannot generate live AI plans.
+
 ## Product direction
 
-The next major product milestones are secure accounts, cloud persistence, collaboration, reminders, and a genuine AI planning integration. Those features require a trusted backend and are not simulated as if they already exist.
+The Claude-powered planning API is implemented in api/plan.js and is designed for Vercel serverless deployment. The current GitHub Pages site remains a static deployment and cannot run this API. To enable live AI, deploy the repository to Vercel and set ANTHROPIC_API_KEY as a server-side environment variable. Never put the key in app.js or commit it. Anthropic API usage is billed separately from a Claude chat subscription. See docs/AI_SETUP.md for setup and privacy details. Secure accounts, cloud persistence, and collaboration remain future work.
 
 See [Product Spec](docs/PRODUCT_SPEC.md), [Architecture](docs/ARCHITECTURE.md), [Roadmap](docs/ROADMAP.md), and [User Guide](docs/USER_GUIDE.md).
 
