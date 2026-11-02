@@ -27,9 +27,11 @@ Choose **New project**, enter a name and optional description, then create it. P
 - Select **Import** and choose a previous TaskFlow JSON backup to restore it.
 - Import replaces the current browser workspace only after you confirm. Keep backups somewhere safe.
 
-## Try the planning helper
+## Use the AI planning assistant
 
-Enter a goal in **Plan your focus** and select **Create a sample plan**. The helper creates a fixed set of practical planning prompts. It does not call an AI model.
+The AI planner becomes available after the Vercel API is deployed and configured. Enter a goal, review the data notice, and check the consent box before selecting **Create AI plan**. Claude returns a short summary and 3–5 suggested tasks. Review each suggestion and select **Add task** only for the ones you want. Suggestions are not saved automatically.
+
+The goal and up to 30 existing task titles, priorities, and completion states are sent to Anthropic for the request. Do not submit sensitive information. If the API is not deployed, the planner explains how to enable it. See [AI setup](AI_SETUP.md). A Claude chat subscription does not include Anthropic API usage; API billing is separate.
 
 ## Where your data lives
 
