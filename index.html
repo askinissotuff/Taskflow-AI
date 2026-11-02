@@ -66,9 +66,10 @@
             <p class="focus-copy">Turn a big goal into a few manageable next steps.</p>
             <label class="field-label" for="goal-input">WHAT ARE YOU WORKING ON?</label>
             <textarea id="goal-input" rows="3" placeholder="e.g. Prepare my science presentation"></textarea>
-            <button id="plan-button" class="secondary-button full-button">Create a sample plan <span>→</span></button>
+            <button id="plan-button" class="secondary-button full-button">Create AI plan <span>✳</span></button>
+            <div id="plan-status" class="ai-status" role="status" aria-live="polite">Claude AI planning is available when the secure API is deployed.</div>
             <div id="plan-output" class="plan-output" aria-live="polite"></div>
-            <p class="demo-note">Demo only: suggestions use simple rules, not a connected AI model.</p>
+            <p class="demo-note">When you request a plan, your goal and up to 30 task titles are sent to Anthropic Claude. Review every suggestion before adding it.</p>
           </section>
         </div>
         <section class="panel projects-panel">
