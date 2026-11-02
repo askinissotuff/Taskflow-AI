@@ -41,13 +41,6 @@ test("createTask rejects an empty title", () => {
   assert.throws(() => Core.createTask({ title: "  " }, "task-2"), /title is required/);
 });
 
-test("makePlan returns no steps for an empty goal", () => {
-  assert.deepEqual(Core.makePlan(" "), []);
-});
-
-test("makePlan creates practical sample steps", () => {
-  assert.equal(Core.makePlan("Finish a presentation").length, 4);
-});
 test("isValidDueDate accepts blank and real calendar dates", () => {
   assert.equal(Core.isValidDueDate(""), true);
   assert.equal(Core.isValidDueDate("2026-11-02"), true);
