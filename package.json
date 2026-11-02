@@ -4,7 +4,7 @@
   "description": "A browser-based task workspace with free, local planning assistance.",
   "scripts": {
     "test": "node --test",
-    "check": "node --check app.js && node --check src/core.js && node --check api/plan.js"
+    "check": "node --check app.js && node --check src/core.js && node --check api/plan.js && node --input-type=module --check < src/ai-planner.js"
   },
   "engines": {
     "node": ">=18"
