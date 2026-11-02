@@ -23,13 +23,11 @@ This roadmap describes possible development stages. Items are plans, not complet
 - [ ] Add collaboration and activity history.
 - [ ] Add safe data export and deletion.
 
-## Stage 4 — AI planning
-- [x] Select Anthropic Claude and document privacy expectations.
-- [x] Build a server-side AI integration with secrets kept off the client.
+## Stage 4 — Planning assistance
+- [x] Build a free browser-local goal planner with no API key or usage fees.
 - [x] Return structured, editable task suggestions.
 - [x] Require user review before suggestions become saved tasks.
-- [ ] Deploy and configure the serverless API with a real Anthropic API key.
-- [ ] Add rate limits, error handling, and usage transparency.
+- [ ] Evaluate optional connected AI providers only if a sustainable free tier is available and privacy is clear.
 
 ## Stage 5 — Integrations and launch readiness
 - [ ] Evaluate calendar and task-tool integrations.
