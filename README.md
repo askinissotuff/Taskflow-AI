@@ -1,6 +1,8 @@
 # TaskFlow AI
 
-**TaskFlow AI** is an early productivity-platform prototype for organizing tasks, managing projects, and breaking larger goals into practical next steps.
+**A focused workspace for turning goals into progress.**
+
+TaskFlow AI is an early-stage productivity product designed to bring tasks, projects, priorities, and progress tracking into one approachable workspace. Its long-term aim is to help individuals and small teams plan clearly without the overhead of heavyweight project-management tools.
 
 > **Project status:** This repository contains a working, browser-based prototype and planning documentation. It does not yet include user accounts, cloud sync, collaboration, or a real AI model. The planning assistant currently uses simple templates.
 
@@ -41,34 +43,33 @@ No API key or environment setup is needed for the current prototype.
 
 ```text
 Taskflow-AI/
-├── index.html             # App interface
-├── styles.css             # Responsive styling
-├── app.js                 # Browser interactions and local state
-├── src/
-│   └── core.js            # Reusable task and planning helpers
-├── tests/
-│   └── core.test.js       # Node.js unit tests
-├── docs/
-│   ├── PRODUCT_SPEC.md    # Product vision and MVP scope
-│   ├── ARCHITECTURE.md    # Current and proposed architecture
-│   └── ROADMAP.md         # Development stages
-├── assets/
-│   └── favicon.svg
 ├── .github/
 │   ├── ISSUE_TEMPLATE/
 │   ├── workflows/
 │   └── pull_request_template.md
+├── assets/
+│   └── favicon.svg
 ├── docs/
 │   ├── ARCHITECTURE.md
 │   ├── PRODUCT_SPEC.md
 │   ├── ROADMAP.md
 │   └── USER_GUIDE.md
+├── src/
+│   └── core.js
+├── tests/
+│   └── core.test.js
 ├── .env.example
 ├── .gitignore
+├── app.js
+├── index.html
+├── styles.css
+├── manifest.webmanifest
+├── package.json
+├── CHANGELOG.md
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
-├── SECURITY.md
-└── package.json
+├── README.md
+└── SECURITY.md
 ```
 
 ## Product direction
