@@ -24,33 +24,7 @@
       priority: ["low", "normal", "high"].includes(input.priority) ? input.priority : "normal",
       dueDate: input.dueDate || "", completed: false, createdAt: new Date().toISOString() };
   }
-  // Free local planner: it never sends goals or tasks over the network.
-  function makePlan(goal, existingTasks) {
-    var clean = String(goal || "").trim().replace(/\s+/g, " ").slice(0, 180);
-    if (!clean) return [];
-    var words = clean.toLowerCase();
-    var school = /school|homework|study|exam|test|class|assignment|essay|presentation|project/.test(words);
-    var creative = /design|draw|write|create|build|make|launch|website|game|video|art/.test(words);
-    var steps = school ? [
-      ["Gather the instructions, materials, and deadline", "high", "Get everything you need in one place before starting."],
-      ["Break " + clean + " into the smallest required sections", "high", "A clear checklist makes the workload easier to manage."],
-      ["Complete the first section, then review what remains", "normal", "Start with one focused work session rather than the whole goal."]
-    ] : creative ? [
-      ["Define what a finished first version of " + clean + " should include", "high", "Decide what done looks like before adding extra details."],
-      ["Collect references and list the main pieces you need", "normal", "Gather what you need before committing to every detail."],
-      ["Create a small first version and test or review it", "high", "A small working draft gives you something concrete to improve."]
-    ] : [
-      ["Define the result you want from " + clean, "high", "Make the goal specific enough to know when it is complete."],
-      ["List the resources and information you may need", "normal", "Prepare the essentials so you can make steady progress."],
-      ["Complete the smallest useful first step", "high", "A quick first action helps turn the goal into progress."]
-    ];
-    steps.push(["Review your progress and choose the next step", "low", "Adjust the plan based on what is actually left to do."]);
-    var existing = (Array.isArray(existingTasks) ? existingTasks : []).filter(function (t) { return t && !t.completed; }).map(function (t) { return String(t.title || "").toLowerCase(); });
-    var suggestions = steps.filter(function (s) { return !existing.some(function (title) { return title && (title.includes(s[0].toLowerCase()) || s[0].toLowerCase().includes(title)); }); });
-    if (!suggestions.length) suggestions = steps;
-    return suggestions.map(function (s) { return { title: s[0], priority: s[1], rationale: s[2] }; });
-  }
-  var api = { completionRate: completionRate, filterTasks: filterTasks, projectProgress: projectProgress, isValidDueDate: isValidDueDate, createTask: createTask, makePlan: makePlan };
+  var api = { completionRate: completionRate, filterTasks: filterTasks, projectProgress: projectProgress, isValidDueDate: isValidDueDate, createTask: createTask };
   root.TaskFlowCore = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof globalThis !== "undefined" ? globalThis : this);
