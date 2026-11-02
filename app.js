@@ -251,6 +251,7 @@
   el("search-input").addEventListener("input", render);
   el("plan-button").addEventListener("click", async function () {
     var goal = el("goal-input").value.trim();
+    if (!el("ai-consent").checked) { showToast("Please review and accept the AI data notice first."); return; }
     if (goal.length < 3) { showToast("Enter a goal with at least 3 characters."); return; }
     var button = el("plan-button");
     button.disabled = true;
