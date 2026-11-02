@@ -190,7 +190,7 @@
         save();
         render();
         addAiTask.closest(".ai-task-suggestion").remove();
-        showToast("AI suggestion added to your tasks.");
+        showToast("Suggested task added.");
         if (!pendingAiPlan.length) el("plan-status").textContent = "All selected suggestions have been added.";
       }
     }
@@ -249,46 +249,31 @@
     importData(event.target.files[0]); event.target.value = "";
   });
   el("search-input").addEventListener("input", render);
-  el("plan-button").addEventListener("click", async function () {
+  el("plan-button").addEventListener("click", function () {
     var goal = el("goal-input").value.trim();
-    if (!el("ai-consent").checked) { showToast("Please review and accept the AI data notice first."); return; }
     if (goal.length < 3) { showToast("Enter a goal with at least 3 characters."); return; }
     var button = el("plan-button");
     button.disabled = true;
     button.setAttribute("aria-busy", "true");
-    button.textContent = "Thinking...";
-    el("plan-status").textContent = "Asking Claude to break your goal into practical steps...";
+    button.textContent = "Building your plan...";
+    el("plan-status").textContent = "Creating practical steps on this device. Your information stays in this browser.";
     el("plan-output").textContent = "";
     try {
-      var response = await fetch((window.TASKFLOW_API_BASE || "") + "/api/plan", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          goal: goal,
-          tasks: data.tasks.slice(0, 30).map(function (task) {
-            return { title: task.title, priority: task.priority, completed: task.completed };
-          })
-        })
-      });
-      var result = await response.json().catch(function () { return {}; });
-      if (!response.ok) throw new Error(result.error || (response.status === 404
-        ? "The AI backend is not deployed yet. Deploy this repository to Vercel and add ANTHROPIC_API_KEY."
-        : "The AI planner could not create a plan."));
-      if (!Array.isArray(result.tasks) || !result.tasks.length) throw new Error("The AI returned an empty plan. Try again.");
-      pendingAiPlan = result.tasks;
-      el("plan-status").textContent = "AI plan ready. Review the suggestions and add only the tasks you want.";
-      el("plan-output").innerHTML = "<strong>" + escapeHtml(result.summary || "Your suggested plan") + "</strong>" +
+      pendingAiPlan = Core.makePlan(goal, data.tasks);
+      if (!pendingAiPlan.length) throw new Error("Enter a goal to create a plan.");
+      el("plan-status").textContent = "Your plan is ready. Review the suggestions and add only the tasks you want.";
+      el("plan-output").innerHTML = "<strong>A practical starting plan for: " + escapeHtml(goal) + "</strong>" +
         '<div class="ai-task-list">' + pendingAiPlan.map(function (task, index) {
           return '<article class="ai-task-suggestion"><div><span class="priority ' + escapeHtml(task.priority) + '">' + escapeHtml(task.priority) + '</span><h3>' + escapeHtml(task.title) + '</h3><p>' + escapeHtml(task.rationale || "") + '</p></div><button type="button" class="text-button" data-add-ai-task="' + index + '">＋ Add task</button></article>';
         }).join("") + "</div>";
     } catch (error) {
       pendingAiPlan = [];
-      el("plan-status").textContent = error.message || "The AI planner is unavailable.";
+      el("plan-status").textContent = error.message || "The planner could not create a plan.";
       showToast(el("plan-status").textContent);
     } finally {
       button.disabled = false;
       button.removeAttribute("aria-busy");
-      button.innerHTML = 'Create AI plan <span>✳</span>';
+      button.innerHTML = 'Create free plan <span>✳</span>';
     }
   });
   el("today-label").textContent = new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" }).format(new Date()).toUpperCase();
