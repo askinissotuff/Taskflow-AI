@@ -4,7 +4,7 @@
 
 TaskFlow AI is a lightweight task and project organizer that runs in your browser. It is designed for people who want a clear place to capture tasks, set priorities, track due dates, and see progress without a complicated setup.
 
-> **Current status:** Public browser-based MVP. The app supports task and project management, browser-local persistence, search, filters, progress summaries, and JSON backup/restore. It does not currently provide accounts, cloud synchronization, shared workspaces, notifications, or a connected AI model. Its free planning helper runs locally in your browser.
+> **Current status:** Public browser-based MVP. The app supports task and project management, browser-local persistence, search, filters, progress summaries, and JSON backup/restore. It does not currently provide accounts, cloud synchronization, shared workspaces, or notifications. Its planning assistant uses a real open-source Llama 3.2 1B language model locally in compatible browsers.
 
 ## Live website
 
@@ -21,7 +21,7 @@ The site is deployed through GitHub Pages from the `main` branch.
 - Filter tasks by all, active, or completed status.
 - Create projects and track their completion progress.
 - Review workspace totals and completion rate.
-- Generate a practical, free planning checklist from a goal directly in your browser. No API key, account, or paid AI service is needed.
+- Generate task plans with the open-source Llama 3.2 1B language model running locally through WebLLM and WebGPU. No API key, account, or inference subscription is needed.
 - Export your workspace to a JSON backup and import it later.
 - Use a responsive layout on desktop and mobile.
 
@@ -46,7 +46,7 @@ To run the app locally:
 
 Tasks and projects are stored in local storage in the browser on the device you are using. They are not uploaded to a TaskFlow account and do not automatically sync between devices. Export a JSON backup before clearing browser data or changing devices. Imported backups replace the current workspace after confirmation.
 
-Do not enter sensitive, confidential, or highly personal information. The planning helper runs locally and does not send your goal or task list to an AI provider. The page loads its typography from Google Fonts when an internet connection is available.
+Do not enter sensitive, confidential, or highly personal information. The AI model runs locally in your browser. Its model files are downloaded from Hugging Face on first use and cached by the browser; your goal and task list are not sent to an inference API. The page loads its typography from Google Fonts when an internet connection is available.
 
 ## Project structure
 
