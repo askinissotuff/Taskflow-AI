@@ -1,7 +1,7 @@
 {
   "name": "taskflow-ai",
   "version": "0.3.0",
-  "description": "A browser-based task workspace with a secure Claude-powered planning API.",
+  "description": "A browser-based task workspace with free, local planning assistance.",
   "scripts": {
     "test": "node --test",
     "check": "node --check app.js && node --check src/core.js && node --check api/plan.js"
