@@ -8,9 +8,9 @@ TaskFlow's current browser app stores task and project data in local storage on 
 
 ## Free planning helper
 
-The current planning helper runs entirely in your browser. The goal you enter and your task list are processed locally by the app and are not sent to Anthropic, another AI provider, or a TaskFlow backend. It requires no account, API key, or payment.
+The planner uses the open-source Llama 3.2 1B Instruct model through WebLLM. Model inference and your prompt/task context are processed on your device using WebGPU; they are not sent to an AI inference API or TaskFlow backend. On first use, the browser downloads model files and supporting runtime code from their hosting providers and may cache them for later use. No account, API key, or AI subscription is required. A compatible browser and capable device are required.
 
-The repository retains an optional server-side Claude integration as a future deployment path, but the public GitHub Pages app does not call it. Do not configure or use a separately deployed API unless you understand its data handling and billing.
+The repository may retain optional server-side integration files for future experiments, but the public GitHub Pages app uses the local model.
 
 ## Backups and deletion
 
