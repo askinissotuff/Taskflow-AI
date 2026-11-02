@@ -4,3 +4,11 @@
 @media(max-width:1100px){.main-content{padding:0 26px 22px}.sidebar{width:215px}.main-content{margin-left:215px}.stat-grid{grid-template-columns:repeat(2,1fr)}.content-grid{grid-template-columns:1fr}.project-grid,.project-grid-large{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.sidebar{position:static;width:auto;height:auto;padding:14px 16px;border-right:0;border-bottom:1px solid var(--line)}.brand{padding:0 3px 13px}.workspace-label,.sidebar-section,.sidebar-bottom{display:none}.main-nav{display:flex;gap:5px;overflow-x:auto}.nav-item{height:36px;padding:0 10px;white-space:nowrap;font-size:11px}.nav-item>span:first-child{display:none}.main-content{margin:0;padding:0 16px 20px}.topbar{height:57px}.search-box{width:min(48vw,210px)}.page{padding-top:25px}.welcome-row,.page-heading{align-items:flex-start;flex-direction:column}.welcome-row .primary-button,.page-heading .primary-button{align-self:flex-start}.stat-grid{gap:9px}.stat-card{padding:14px;min-height:105px}.stat-card strong{font-size:24px}.panel{padding:16px}.project-grid,.project-grid-large{grid-template-columns:1fr}.footer-note{font-size:9px}.breadcrumbs{font-size:11px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+/* Public launch polish */
+.utility-button{border:1px solid var(--line);background:var(--panel);color:#cbd2e0;border-radius:8px;padding:9px 11px;font-size:11px;font-weight:700}
+.utility-button:hover{border-color:var(--purple);color:#fff}
+.filter-actions{display:flex;align-items:center;gap:14px}
+#clear-completed-button[hidden]{display:none}
+.overdue{color:var(--red)!important;font-weight:700}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--purple);outline-offset:2px}
+@media(max-width:700px){.topbar-actions{gap:6px}.utility-button{padding:8px 9px;font-size:10px}.search-box{width:min(36vw,150px);padding:0 7px}.avatar-small{display:none}.filter-actions{gap:8px}.filter-row{gap:8px}.filter-tab{padding:8px 9px}}
