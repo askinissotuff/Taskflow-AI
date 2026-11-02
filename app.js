@@ -19,6 +19,7 @@
   var currentFilter = "all";
   var activeProject = null;
   var toastTimer;
+  var pendingAiPlan = [];
 
   function validData(value) {
     return !!value && Array.isArray(value.projects) && Array.isArray(value.tasks) &&
@@ -179,6 +180,20 @@
     reader.readAsText(file);
   }
   document.addEventListener("click", function (event) {
+    var addAiTask = event.target.closest("[data-add-ai-task]");
+    if (addAiTask) {
+      var suggested = pendingAiPlan[Number(addAiTask.dataset.addAiTask)];
+      if (suggested) {
+        var created = Core.createTask({ title: suggested.title, priority: suggested.priority }, "ai-" + Date.now().toString(36));
+        data.tasks.unshift(created);
+        pendingAiPlan.splice(Number(addAiTask.dataset.addAiTask), 1);
+        save();
+        render();
+        addAiTask.closest(".ai-task-suggestion").remove();
+        showToast("AI suggestion added to your tasks.");
+        if (!pendingAiPlan.length) el("plan-status").textContent = "All selected suggestions have been added.";
+      }
+    }
     var nav = event.target.closest("[data-view]");
     if (nav) navigate(nav.dataset.view);
     var openView = event.target.closest("[data-open-view]");
@@ -234,10 +249,46 @@
     importData(event.target.files[0]); event.target.value = "";
   });
   el("search-input").addEventListener("input", render);
-  el("plan-button").addEventListener("click", function () {
-    var steps = Core.makePlan(el("goal-input").value);
-    if (!steps.length) { showToast("Add a goal first."); return; }
-    el("plan-output").innerHTML = "<strong>Suggested next steps</strong><ol>" + steps.map(function (step) { return "<li>" + escapeHtml(step) + "</li>"; }).join("") + "</ol>";
+  el("plan-button").addEventListener("click", async function () {
+    var goal = el("goal-input").value.trim();
+    if (goal.length < 3) { showToast("Enter a goal with at least 3 characters."); return; }
+    var button = el("plan-button");
+    button.disabled = true;
+    button.setAttribute("aria-busy", "true");
+    button.textContent = "Thinking...";
+    el("plan-status").textContent = "Asking Claude to break your goal into practical steps...";
+    el("plan-output").textContent = "";
+    try {
+      var response = await fetch((window.TASKFLOW_API_BASE || "") + "/api/plan", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          goal: goal,
+          tasks: data.tasks.slice(0, 30).map(function (task) {
+            return { title: task.title, priority: task.priority, completed: task.completed };
+          })
+        })
+      });
+      var result = await response.json().catch(function () { return {}; });
+      if (!response.ok) throw new Error(result.error || (response.status === 404
+        ? "The AI backend is not deployed yet. Deploy this repository to Vercel and add ANTHROPIC_API_KEY."
+        : "The AI planner could not create a plan."));
+      if (!Array.isArray(result.tasks) || !result.tasks.length) throw new Error("The AI returned an empty plan. Try again.");
+      pendingAiPlan = result.tasks;
+      el("plan-status").textContent = "AI plan ready. Review the suggestions and add only the tasks you want.";
+      el("plan-output").innerHTML = "<strong>" + escapeHtml(result.summary || "Your suggested plan") + "</strong>" +
+        '<div class="ai-task-list">' + pendingAiPlan.map(function (task, index) {
+          return '<article class="ai-task-suggestion"><div><span class="priority ' + escapeHtml(task.priority) + '">' + escapeHtml(task.priority) + '</span><h3>' + escapeHtml(task.title) + '</h3><p>' + escapeHtml(task.rationale || "") + '</p></div><button type="button" class="text-button" data-add-ai-task="' + index + '">＋ Add task</button></article>';
+        }).join("") + "</div>";
+    } catch (error) {
+      pendingAiPlan = [];
+      el("plan-status").textContent = error.message || "The AI planner is unavailable.";
+      showToast(el("plan-status").textContent);
+    } finally {
+      button.disabled = false;
+      button.removeAttribute("aria-busy");
+      button.innerHTML = 'Create AI plan <span>✳</span>';
+    }
   });
   el("today-label").textContent = new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" }).format(new Date()).toUpperCase();
   navigate("overview");
