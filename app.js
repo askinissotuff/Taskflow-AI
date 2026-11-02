@@ -80,7 +80,8 @@
     el("all-project-cards").innerHTML = data.projects.map(renderProject).join("") || '<div class="empty-state">No projects yet. Create your first one.</div>';
     var upcoming = data.tasks.filter(function (task) { return !task.completed; }).slice(0, 5);
     el("upcoming-list").innerHTML = upcoming.map(renderTask).join("") || '<div class="empty-state">You are all caught up. Nice work!</div>';
-    var filtered = Core.filterTasks(data.tasks, currentFilter, el("search-input").value);
+    var searchableTasks = data.tasks.map(function (task) { return Object.assign({}, task, { projectName: projectName(task.projectId) }); });
+    var filtered = Core.filterTasks(searchableTasks, currentFilter, el("search-input").value);
     if (activeProject) filtered = filtered.filter(function (task) { return task.projectId === activeProject; });
     el("all-task-list").innerHTML = filtered.map(renderTask).join("") || '<div class="empty-state">No tasks match this view. Add a task to get started.</div>';
     el("task-results-label").textContent = filtered.length + " task" + (filtered.length === 1 ? "" : "s");
