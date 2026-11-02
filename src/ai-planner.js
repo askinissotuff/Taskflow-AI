@@ -14,8 +14,8 @@ async function loadEngine(onProgress) {
         initProgressCallback: (progress) => {
           if (onProgress) {
             const detail = progress && progress.text ? progress.text : "Preparing the AI model...";
-            const match = detail.match(/(\\d+(?:\\.\\d+)?)%/);
-            onProgress(match ? "Downloading AI model: " + match[1] + "%" : detail);
+            const percent = detail.match(/\d+(?:\.\d+)?%/);
+            onProgress(percent ? "Downloading AI model: " + percent[0] : detail);
           }
         }
       })
@@ -51,10 +51,13 @@ export async function createPlan(goal, tasks, onProgress) {
   });
   const raw = response.choices && response.choices[0] && response.choices[0].message
     ? response.choices[0].message.content : "";
-  const match = String(raw || "").match(/\\{[\\s\\S]*\\}/);
-  if (!match) throw new Error("The AI response could not be read. Please try again.");
+  const firstBrace = String(raw || "").indexOf("{");
+  const lastBrace = String(raw || "").lastIndexOf("}");
+  if (firstBrace < 0 || lastBrace <= firstBrace) {
+    throw new Error("The AI response could not be read. Please try again.");
+  }
   let parsed;
-  try { parsed = JSON.parse(match[0]); }
+  try { parsed = JSON.parse(String(raw).slice(firstBrace, lastBrace + 1)); }
   catch (_) { throw new Error("The AI returned an unreadable plan. Please try again."); }
   if (!parsed || !Array.isArray(parsed.tasks)) throw new Error("The AI response did not contain a task list.");
   const seen = new Set();
