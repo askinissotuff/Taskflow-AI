@@ -12,3 +12,16 @@
 .overdue{color:var(--red)!important;font-weight:700}
 button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--purple);outline-offset:2px}
 @media(max-width:700px){.topbar-actions{gap:6px}.utility-button{padding:8px 9px;font-size:10px}.search-box{width:min(36vw,150px);padding:0 7px}.avatar-small{display:none}.filter-actions{gap:8px}.filter-row{gap:8px}.filter-tab{padding:8px 9px}}
+
+
+/* AI planner */
+.ai-consent{display:flex;align-items:flex-start;gap:9px;margin:12px 0;color:var(--muted);font-size:11px;line-height:1.5}
+.ai-consent input{margin:2px 0 0;accent-color:var(--purple);flex:0 0 auto}
+.ai-status{margin:10px 0;color:var(--muted);font-size:11px;line-height:1.5}
+.ai-task-list{display:grid;gap:10px;margin-top:12px}
+.ai-task-suggestion{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025)}
+.ai-task-suggestion h3{margin:7px 0 4px;font-size:13px;color:var(--text)}
+.ai-task-suggestion p{margin:0;color:var(--muted);font-size:11px;line-height:1.5}
+.ai-task-suggestion .text-button{white-space:nowrap;flex:0 0 auto}
+#plan-button:disabled{opacity:.65;cursor:wait}
+@media(max-width:700px){.ai-task-suggestion{flex-direction:column}.ai-task-suggestion .text-button{align-self:flex-start}}
