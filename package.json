@@ -1,8 +1,7 @@
 {
   "name": "taskflow-ai",
-  "version": "0.1.0",
-  "private": true,
-  "description": "An early productivity platform prototype for organizing tasks and projects.",
+  "version": "0.2.0",
+  "description": "A browser-based workspace for organizing tasks, projects, and priorities.",
   "scripts": {
     "test": "node --test"
   },
