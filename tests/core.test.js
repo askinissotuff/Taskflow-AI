@@ -48,3 +48,13 @@ test("makePlan returns no steps for an empty goal", () => {
 test("makePlan creates practical sample steps", () => {
   assert.equal(Core.makePlan("Finish a presentation").length, 4);
 });
+test("isValidDueDate accepts blank and real calendar dates", () => {
+  assert.equal(Core.isValidDueDate(""), true);
+  assert.equal(Core.isValidDueDate("2026-11-02"), true);
+  assert.equal(Core.isValidDueDate("2026-02-30"), false);
+  assert.equal(Core.isValidDueDate("not-a-date"), false);
+});
+
+test("createTask rejects impossible due dates", () => {
+  assert.throws(() => Core.createTask({ title: "Plan", dueDate: "2026-02-30" }, "task-3"), /valid due date/);
+});
