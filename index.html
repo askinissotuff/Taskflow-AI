@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10131d">
+  <meta name="description" content="TaskFlow AI helps you organize projects, focus on priorities, and track your progress.">
+  <title>TaskFlow AI — Work with clarity</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="src/core.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="TaskFlow AI home"><span class="brand-mark">✳</span><span>taskflow<span class="brand-ai">.ai</span></span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="overview"><span>▦</span> Overview</button>
+        <button class="nav-item" data-view="tasks"><span>☷</span> My tasks <span class="nav-count" id="nav-task-count">0</span></button>
+        <button class="nav-item" data-view="projects"><span>▧</span> Projects</button>
+      </nav>
+      <div class="sidebar-section">
+        <div class="section-heading">YOUR PROJECTS <button id="add-project-shortcut" class="icon-button" aria-label="Add project">＋</button></div>
+        <div id="project-nav" class="project-nav"></div>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="profile-avatar">TF</div>
+        <div><strong>My workspace</strong><small>Personal plan</small></div>
+        <span class="online-dot" aria-label="Local demo"></span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Workspace</span><span class="crumb-separator">/</span><strong id="breadcrumb-current">Overview</strong></div>
+        <div class="topbar-actions">
+          <label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search tasks..." aria-label="Search tasks"></label>
+          <button class="avatar-small" title="Demo workspace">TF</button>
+        </div>
+      </header>
+
+      <section class="page" id="overview-view">
+        <div class="welcome-row">
+          <div><p class="eyebrow" id="today-label">YOUR WORKSPACE</p><h1>Make room for <span>great work.</span></h1><p class="subheading">A clear view of what matters today.</p></div>
+          <button class="primary-button" id="quick-add-button">＋ New task</button>
+        </div>
+        <div class="stat-grid">
+          <article class="stat-card"><span class="stat-label">TOTAL TASKS</span><strong id="stat-total">0</strong><span class="stat-foot">Across your workspace</span></article>
+          <article class="stat-card"><span class="stat-label">COMPLETED</span><strong id="stat-completed">0</strong><span class="stat-foot">Tasks checked off</span></article>
+          <article class="stat-card"><span class="stat-label">IN PROGRESS</span><strong id="stat-active">0</strong><span class="stat-foot">Still on your list</span></article>
+          <article class="stat-card accent-card"><span class="stat-label">COMPLETION RATE</span><strong id="stat-rate">0%</strong><div class="progress-track"><span id="stat-progress"></span></div></article>
+        </div>
+        <div class="content-grid">
+          <section class="panel task-panel">
+            <div class="panel-heading"><div><p class="eyebrow">STAY ON TRACK</p><h2>Upcoming tasks</h2></div><button class="text-button" data-open-view="tasks">View all <span>→</span></button></div>
+            <div id="upcoming-list" class="task-list"></div>
+          </section>
+          <section class="panel focus-panel">
+            <div class="panel-heading"><div><p class="eyebrow">A LITTLE DIRECTION</p><h2>Plan your focus</h2></div><span class="sparkle">✳</span></div>
+            <p class="focus-copy">Turn a big goal into a few manageable next steps.</p>
+            <label class="field-label" for="goal-input">WHAT ARE YOU WORKING ON?</label>
+            <textarea id="goal-input" rows="3" placeholder="e.g. Prepare my science presentation"></textarea>
+            <button id="plan-button" class="secondary-button full-button">Create a sample plan <span>→</span></button>
+            <div id="plan-output" class="plan-output" aria-live="polite"></div>
+            <p class="demo-note">Demo only: suggestions use simple rules, not a connected AI model.</p>
+          </section>
+        </div>
+        <section class="panel projects-panel">
+          <div class="panel-heading"><div><p class="eyebrow">WHAT YOU'RE BUILDING</p><h2>Your projects</h2></div><button id="add-project-button" class="text-button">＋ New project</button></div>
+          <div id="project-cards" class="project-grid"></div>
+        </section>
+      </section>
+
+      <section class="page hidden" id="tasks-view">
+        <div class="page-heading"><div><p class="eyebrow">YOUR WORKLOAD</p><h1>My tasks</h1><p class="subheading">Small steps add up. Keep moving.</p></div><button class="primary-button" id="tasks-add-button">＋ New task</button></div>
+        <div class="filter-row"><div id="task-filters" class="filter-tabs"><button class="filter-tab selected" data-filter="all">All</button><button class="filter-tab" data-filter="active">Active</button><button class="filter-tab" data-filter="completed">Completed</button></div><span id="task-results-label" class="muted"></span></div>
+        <div class="panel"><div id="all-task-list" class="task-list"></div></div>
+      </section>
+
+      <section class="page hidden" id="projects-view">
+        <div class="page-heading"><div><p class="eyebrow">BIG IDEAS, ORGANIZED</p><h1>Projects</h1><p class="subheading">Give every goal a place to grow.</p></div><button class="primary-button" id="projects-add-button">＋ New project</button></div>
+        <div id="all-project-cards" class="project-grid project-grid-large"></div>
+      </section>
+      <footer class="footer-note">TaskFlow AI <span>•</span> Early prototype <span>•</span> Your demo data stays in this browser</footer>
+    </main>
+  </div>
+
+  <dialog id="task-dialog" class="modal">
+    <form id="task-form" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">ADD TO YOUR LIST</p><h2>New task</h2></div><button type="button" class="icon-button" data-close="task-dialog" aria-label="Close">×</button></div>
+      <label class="field-label" for="task-title">TASK NAME</label><input id="task-title" maxlength="100" required placeholder="What needs to get done?">
+      <label class="field-label" for="task-project">PROJECT</label><select id="task-project"></select>
+      <div class="form-row"><div><label class="field-label" for="task-priority">PRIORITY</label><select id="task-priority"><option value="normal">Normal</option><option value="high">High</option><option value="low">Low</option></select></div><div><label class="field-label" for="task-due">DUE DATE</label><input id="task-due" type="date"></div></div>
+      <div class="modal-actions"><button type="button" class="secondary-button" data-close="task-dialog">Cancel</button><button type="submit" class="primary-button">Create task</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="project-dialog" class="modal">
+    <form id="project-form" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">MAKE IT HAPPEN</p><h2>New project</h2></div><button type="button" class="icon-button" data-close="project-dialog" aria-label="Close">×</button></div>
+      <label class="field-label" for="project-name">PROJECT NAME</label><input id="project-name" maxlength="60" required placeholder="e.g. Launch my portfolio">
+      <label class="field-label" for="project-description">DESCRIPTION</label><textarea id="project-description" rows="3" maxlength="180" placeholder="What is this project about?"></textarea>
+      <div class="modal-actions"><button type="button" class="secondary-button" data-close="project-dialog">Cancel</button><button type="submit" class="primary-button">Create project</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
