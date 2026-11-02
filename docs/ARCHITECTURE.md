@@ -31,9 +31,7 @@ A production version should introduce:
 
 ## AI integration boundary
 
-The current planning helper is deterministic template logic. It is not an AI model.
-
-A future AI endpoint should accept a user's goal and relevant context, validate and limit input, call a configured provider from the server, and return structured suggestions. The app should make generated suggestions reviewable and editable before turning them into tasks.
+The planning assistant uses a server-side Vercel function at api/plan.js. It validates and bounds incoming context, calls the Anthropic Messages API using a server-only ANTHROPIC_API_KEY, requests structured task suggestions, validates the response, and returns a small JSON payload. The browser requires explicit consent before sending the goal and up to 30 task summaries. Suggestions are reviewed individually before they become local tasks. GitHub Pages cannot host the function; the backend must be deployed to Vercel or another compatible Node serverless host.
 
 ## Security and privacy considerations
 
