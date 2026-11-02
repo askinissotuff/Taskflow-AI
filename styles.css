@@ -226,3 +226,6 @@ textarea { resize:vertical; line-height:1.55; }
 @media (prefers-reduced-motion:reduce) {
   *,*:before,*:after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
 }
+
+.skip-link { position:fixed; top:10px; left:10px; z-index:20; padding:10px 14px; border-radius:9px; color:#17132b; background:#c0b3ff; font-weight:800; text-decoration:none; transform:translateY(-160%); }
+.skip-link:focus { transform:translateY(0); }
