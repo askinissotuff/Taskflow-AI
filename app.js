@@ -130,7 +130,7 @@
     ["overview", "tasks", "projects"].forEach(function (name) {
       el(name + "-view").classList.toggle("hidden", name !== view);
       var button = document.querySelector('[data-view="' + name + '"]');
-      if (button) button.classList.toggle("active", name === view);
+      if (button) { button.classList.toggle("active", name === view); if (name === view) button.setAttribute("aria-current", "page"); else button.removeAttribute("aria-current"); }
     });
     el("breadcrumb-current").textContent = view === "overview" ? "Overview" : view === "tasks" ? "My tasks" : "Projects";
     render();
@@ -226,7 +226,7 @@
     var filter = event.target.closest("[data-filter]");
     if (filter) {
       currentFilter = filter.dataset.filter;
-      document.querySelectorAll("[data-filter]").forEach(function (button) { button.classList.toggle("selected", button === filter); });
+      document.querySelectorAll("[data-filter]").forEach(function (button) { button.classList.toggle("selected", button === filter); button.setAttribute("aria-pressed", button === filter ? "true" : "false"); });
       render();
     }
   });
