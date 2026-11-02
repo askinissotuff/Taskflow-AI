@@ -229,3 +229,56 @@ textarea { resize:vertical; line-height:1.55; }
 
 .skip-link { position:fixed; top:10px; left:10px; z-index:20; padding:10px 14px; border-radius:9px; color:#17132b; background:#c0b3ff; font-weight:800; text-decoration:none; transform:translateY(-160%); }
 .skip-link:focus { transform:translateY(0); }
+
+/* Motion + visual polish */
+body { isolation:isolate; }
+body:before,body:after { position:fixed; z-index:-1; width:440px; height:440px; border-radius:50%; content:""; pointer-events:none; filter:blur(90px); opacity:.12; animation:ambient-drift 18s ease-in-out infinite alternate; }
+body:before { top:-210px; right:4%; background:#8066ff; }
+body:after { bottom:-260px; left:24%; background:#3c9fcb; animation-delay:-8s; }
+@keyframes ambient-drift { from { transform:translate3d(-18px,-10px,0) scale(.92); } to { transform:translate3d(45px,38px,0) scale(1.12); } }
+@keyframes rise-in { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+@keyframes soft-glow { 0%,100% { box-shadow:0 7px 20px #9b86ff24; } 50% { box-shadow:0 9px 32px #9b86ff52; } }
+@keyframes shimmer { 0% { background-position:0% 50%; } 100% { background-position:200% 50%; } }
+@keyframes pulse-dot { 0%,100% { box-shadow:0 0 0 4px #72dfb51a; } 50% { box-shadow:0 0 0 7px #72dfb50a; } }
+.page:not(.hidden) { animation:rise-in .55s cubic-bezier(.2,.75,.25,1) both; }
+.welcome-row { animation:rise-in .6s .04s both; }
+.stat-card { animation:rise-in .55s cubic-bezier(.2,.75,.25,1) both; }
+.stat-card:nth-child(2) { animation-delay:.07s; }
+.stat-card:nth-child(3) { animation-delay:.14s; }
+.stat-card:nth-child(4) { animation-delay:.21s; }
+.content-grid { animation:rise-in .6s .18s both; }
+.projects-panel { animation:rise-in .65s .24s both; }
+.brand-mark { animation:soft-glow 4s ease-in-out infinite; }
+.brand:hover .brand-mark { transform:rotate(-12deg) scale(1.08); }
+.brand-mark,.primary-button,.secondary-button,.icon-button,.nav-item,.project-card,.task-row,.utility-button { transition:transform .22s cubic-bezier(.2,.8,.2,1),background .22s,border-color .22s,box-shadow .22s,color .22s; }
+.primary-button { position:relative; overflow:hidden; }
+.primary-button:after { position:absolute; inset:-60% auto -60% -45%; width:35%; content:""; background:linear-gradient(90deg,transparent,#ffffff75,transparent); transform:skewX(-20deg); transition:left .6s; }
+.primary-button:hover:after { left:125%; }
+h1 span { background:linear-gradient(100deg,#9b87ff,#d1c7ff,#8dceff,#9b87ff); background-size:220% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:shimmer 7s linear infinite; }
+.stat-card:hover { transform:translateY(-4px); border-color:#8573d35c; box-shadow:0 15px 36px #0003; }
+.panel { transition:border-color .22s,box-shadow .22s,transform .22s; }
+.panel:hover { border-color:#4b5874; box-shadow:0 15px 38px #00000020; }
+.project-card { animation:rise-in .45s both; }
+.project-card:nth-child(2) { animation-delay:.06s; }
+.project-card:nth-child(3) { animation-delay:.12s; }
+.project-card:nth-child(4) { animation-delay:.18s; }
+.project-card:nth-child(5) { animation-delay:.24s; }
+.project-card:nth-child(6) { animation-delay:.3s; }
+.task-row { animation:rise-in .3s both; }
+.task-row:hover { transform:translateX(3px); }
+.task-check { transition:transform .18s,border-color .18s,background .18s; }
+.task-check:hover { transform:scale(1.14); }
+.online-dot { animation:pulse-dot 2.8s ease-in-out infinite; }
+.sparkle { display:inline-block; animation:sparkle-turn 12s linear infinite; }
+@keyframes sparkle-turn { to { transform:rotate(360deg); } }
+.search-box:focus-within { transform:translateY(-1px); }
+.modal[open] { animation:rise-in .25s cubic-bezier(.2,.8,.2,1); }
+.toast.show { animation:rise-in .2s both; }
+@media (max-width:700px) {
+  body:before,body:after { width:260px; height:260px; filter:blur(65px); }
+  .stat-card:hover,.project-card:hover { transform:translateY(-2px); }
+}
+@media (prefers-reduced-motion:reduce) {
+  body:before,body:after,.page:not(.hidden),.welcome-row,.stat-card,.content-grid,.projects-panel,.brand-mark,h1 span,.project-card,.task-row,.online-dot,.sparkle { animation:none!important; }
+  .primary-button:after { display:none; }
+}
