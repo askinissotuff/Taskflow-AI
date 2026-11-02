@@ -34,7 +34,7 @@
         tasks: saved.tasks.map(function (t) { return {
           id: t.id, title: t.title.slice(0, 100), projectId: String(t.projectId || "inbox"),
           priority: ["low", "normal", "high"].includes(t.priority) ? t.priority : "normal",
-          dueDate: /^\d{4}-\d{2}-\d{2}$/.test(t.dueDate || "") ? t.dueDate : "",
+          dueDate: Core.isValidDueDate(t.dueDate || "") ? t.dueDate : "",
           completed: t.completed, createdAt: t.createdAt || ""
         }; })
       };
@@ -168,7 +168,7 @@
           tasks: imported.tasks.map(function (t) { return {
             id: t.id, title: t.title.slice(0, 100), projectId: String(t.projectId || "inbox"),
             priority: ["low", "normal", "high"].includes(t.priority) ? t.priority : "normal",
-            dueDate: /^\d{4}-\d{2}-\d{2}$/.test(t.dueDate || "") ? t.dueDate : "",
+            dueDate: Core.isValidDueDate(t.dueDate || "") ? t.dueDate : "",
             completed: t.completed, createdAt: t.createdAt || ""
           }; })
         };
