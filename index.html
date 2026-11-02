@@ -6,7 +6,9 @@
   <meta name="theme-color" content="#10131d">
   <meta name="description" content="TaskFlow AI helps you organize projects, focus on priorities, and track your progress.">
   <title>TaskFlow AI — Work with clarity</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">\n  <link rel="manifest" href="manifest.webmanifest">\n  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
   <script src="src/core.js" defer></script>
   <script src="app.js" defer></script>
 </head>
@@ -35,6 +37,9 @@
       <header class="topbar">
         <div class="breadcrumbs"><span>Workspace</span><span class="crumb-separator">/</span><strong id="breadcrumb-current">Overview</strong></div>
         <div class="topbar-actions">
+          <button id="export-button" class="utility-button" type="button">Export</button>
+          <button id="import-button" class="utility-button" type="button">Import</button>
+          <input id="import-file" type="file" accept="application/json,.json" hidden>
           <label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search tasks..." aria-label="Search tasks"></label>
           <button class="avatar-small" title="Demo workspace">TF</button>
         </div>
@@ -74,7 +79,7 @@
 
       <section class="page hidden" id="tasks-view">
         <div class="page-heading"><div><p class="eyebrow">YOUR WORKLOAD</p><h1>My tasks</h1><p class="subheading">Small steps add up. Keep moving.</p></div><button class="primary-button" id="tasks-add-button">＋ New task</button></div>
-        <div class="filter-row"><div id="task-filters" class="filter-tabs"><button class="filter-tab selected" data-filter="all">All</button><button class="filter-tab" data-filter="active">Active</button><button class="filter-tab" data-filter="completed">Completed</button></div><span id="task-results-label" class="muted"></span></div>
+        <div class="filter-row"><div id="task-filters" class="filter-tabs"><button class="filter-tab selected" data-filter="all">All</button><button class="filter-tab" data-filter="active">Active</button><button class="filter-tab" data-filter="completed">Completed</button></div><div class="filter-actions"><span id="task-results-label" class="muted"></span><button id="clear-completed-button" class="text-button" type="button">Clear completed</button></div></div>
         <div class="panel"><div id="all-task-list" class="task-list"></div></div>
       </section>
 
@@ -82,7 +87,7 @@
         <div class="page-heading"><div><p class="eyebrow">BIG IDEAS, ORGANIZED</p><h1>Projects</h1><p class="subheading">Give every goal a place to grow.</p></div><button class="primary-button" id="projects-add-button">＋ New project</button></div>
         <div id="all-project-cards" class="project-grid project-grid-large"></div>
       </section>
-      <footer class="footer-note">TaskFlow AI <span>•</span> Early prototype <span>•</span> Your demo data stays in this browser</footer>
+      <footer class="footer-note">TaskFlow AI <span>•</span> Personal workspace <span>•</span> Data stays in this browser unless you export it</footer>
     </main>
   </div>
 
