@@ -13,17 +13,18 @@
   <script src="app.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="app-shell">
     <aside class="sidebar">
       <a class="brand" href="#" aria-label="TaskFlow AI home"><span class="brand-mark">✳</span><span>taskflow<span class="brand-ai">.ai</span></span></a>
       <div class="workspace-label">WORKSPACE</div>
       <nav class="main-nav" aria-label="Main navigation">
-        <button class="nav-item active" data-view="overview"><span>▦</span> Overview</button>
-        <button class="nav-item" data-view="tasks"><span>☷</span> My tasks <span class="nav-count" id="nav-task-count">0</span></button>
-        <button class="nav-item" data-view="projects"><span>▧</span> Projects</button>
+        <button type="button" class="nav-item active" data-view="overview" aria-current="page"><span>▦</span> Overview</button>
+        <button type="button" class="nav-item" data-view="tasks"><span>☷</span> My tasks <span class="nav-count" id="nav-task-count">0</span></button>
+        <button type="button" class="nav-item" data-view="projects"><span>▧</span> Projects</button>
       </nav>
       <div class="sidebar-section">
-        <div class="section-heading">YOUR PROJECTS <button id="add-project-shortcut" class="icon-button" aria-label="Add project">＋</button></div>
+        <div class="section-heading">YOUR PROJECTS <button type="button" id="add-project-shortcut" class="icon-button" aria-label="Add project">＋</button></div>
         <div id="project-nav" class="project-nav"></div>
       </div>
       <div class="sidebar-bottom">
@@ -33,22 +34,22 @@
       </div>
     </aside>
 
-    <main class="main-content">
+    <main class="main-content" id="main-content" tabindex="-1">
       <header class="topbar">
         <div class="breadcrumbs"><span>Workspace</span><span class="crumb-separator">/</span><strong id="breadcrumb-current">Overview</strong></div>
         <div class="topbar-actions">
-          <button id="export-button" class="utility-button" type="button">Export</button>
-          <button id="import-button" class="utility-button" type="button">Import</button>
+          <button type="button" id="export-button" class="utility-button" type="button">Export</button>
+          <button type="button" id="import-button" class="utility-button" type="button">Import</button>
           <input id="import-file" type="file" accept="application/json,.json" hidden>
           <label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search tasks..." aria-label="Search tasks"></label>
-          <button class="avatar-small" title="Demo workspace">TF</button>
+          <button type="button" class="avatar-small" title="Demo workspace" aria-label="Demo workspace">TF</button>
         </div>
       </header>
 
       <section class="page" id="overview-view">
         <div class="welcome-row">
           <div><p class="eyebrow" id="today-label">YOUR WORKSPACE</p><h1>Make room for <span>great work.</span></h1><p class="subheading">A clear view of what matters today.</p></div>
-          <button class="primary-button" id="quick-add-button">＋ New task</button>
+          <button type="button" class="primary-button" id="quick-add-button">＋ New task</button>
         </div>
         <div class="stat-grid">
           <article class="stat-card"><span class="stat-label">TOTAL TASKS</span><strong id="stat-total">0</strong><span class="stat-foot">Across your workspace</span></article>
@@ -58,7 +59,7 @@
         </div>
         <div class="content-grid">
           <section class="panel task-panel">
-            <div class="panel-heading"><div><p class="eyebrow">STAY ON TRACK</p><h2>Upcoming tasks</h2></div><button class="text-button" data-open-view="tasks">View all <span>→</span></button></div>
+            <div class="panel-heading"><div><p class="eyebrow">STAY ON TRACK</p><h2>Upcoming tasks</h2></div><button type="button" class="text-button" data-open-view="tasks">View all <span>→</span></button></div>
             <div id="upcoming-list" class="task-list"></div>
           </section>
           <section class="panel focus-panel">
@@ -67,26 +68,26 @@
             <label class="field-label" for="goal-input">WHAT ARE YOU WORKING ON?</label>
             <textarea id="goal-input" rows="3" placeholder="e.g. Prepare my science presentation"></textarea>
             <p class="planner-privacy">Free open-source AI · Runs on your device · No API key or subscription.</p>
-            <button id="plan-button" class="secondary-button full-button">Generate with free AI <span>✳</span></button>
+            <button type="button" id="plan-button" class="secondary-button full-button">Generate with free AI <span>✳</span></button>
             <div id="plan-status" class="ai-status" role="status" aria-live="polite">The first use downloads the AI model. Your goal and tasks stay on this device.</div>
             <div id="plan-output" class="plan-output" aria-live="polite"></div>
             <p class="demo-note">Uses Llama 3.2 1B through WebLLM and WebGPU. A compatible browser and capable device are required; the first model download may take time.</p>
           </section>
         </div>
         <section class="panel projects-panel">
-          <div class="panel-heading"><div><p class="eyebrow">WHAT YOU'RE BUILDING</p><h2>Your projects</h2></div><button id="add-project-button" class="text-button">＋ New project</button></div>
+          <div class="panel-heading"><div><p class="eyebrow">WHAT YOU'RE BUILDING</p><h2>Your projects</h2></div><button type="button" id="add-project-button" class="text-button">＋ New project</button></div>
           <div id="project-cards" class="project-grid"></div>
         </section>
       </section>
 
       <section class="page hidden" id="tasks-view">
-        <div class="page-heading"><div><p class="eyebrow">YOUR WORKLOAD</p><h1>My tasks</h1><p class="subheading">Small steps add up. Keep moving.</p></div><button class="primary-button" id="tasks-add-button">＋ New task</button></div>
-        <div class="filter-row"><div id="task-filters" class="filter-tabs"><button class="filter-tab selected" data-filter="all">All</button><button class="filter-tab" data-filter="active">Active</button><button class="filter-tab" data-filter="completed">Completed</button></div><div class="filter-actions"><span id="task-results-label" class="muted"></span><button id="clear-completed-button" class="text-button" type="button">Clear completed</button></div></div>
+        <div class="page-heading"><div><p class="eyebrow">YOUR WORKLOAD</p><h1>My tasks</h1><p class="subheading">Small steps add up. Keep moving.</p></div><button type="button" class="primary-button" id="tasks-add-button">＋ New task</button></div>
+        <div class="filter-row"><div id="task-filters" class="filter-tabs"><button type="button" class="filter-tab selected" data-filter="all" aria-pressed="true">All</button><button type="button" class="filter-tab" data-filter="active" aria-pressed="false">Active</button><button type="button" class="filter-tab" data-filter="completed" aria-pressed="false">Completed</button></div><div class="filter-actions"><span id="task-results-label" class="muted"></span><button type="button" id="clear-completed-button" class="text-button" type="button">Clear completed</button></div></div>
         <div class="panel"><div id="all-task-list" class="task-list"></div></div>
       </section>
 
       <section class="page hidden" id="projects-view">
-        <div class="page-heading"><div><p class="eyebrow">BIG IDEAS, ORGANIZED</p><h1>Projects</h1><p class="subheading">Give every goal a place to grow.</p></div><button class="primary-button" id="projects-add-button">＋ New project</button></div>
+        <div class="page-heading"><div><p class="eyebrow">BIG IDEAS, ORGANIZED</p><h1>Projects</h1><p class="subheading">Give every goal a place to grow.</p></div><button type="button" class="primary-button" id="projects-add-button">＋ New project</button></div>
         <div id="all-project-cards" class="project-grid project-grid-large"></div>
       </section>
       <footer class="footer-note">TaskFlow AI <span>•</span> Personal workspace <span>•</span> Data stays in this browser unless you export it</footer>
