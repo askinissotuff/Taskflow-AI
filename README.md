@@ -4,7 +4,7 @@
 
 > **Project status:** This repository contains a working, browser-based prototype and planning documentation. It does not yet include user accounts, cloud sync, collaboration, or a real AI model. The planning assistant currently uses simple templates.
 
-## What you can try
+## Live demo\n\nA GitHub Pages deployment workflow is configured for the `main` branch. Once GitHub Pages is enabled for this repository with **GitHub Actions** as its deployment source, the site will publish at:\n\n`https://askinissotuff.github.io/Taskflow-AI/`\n\n## What you can try
 
 - Create, complete, and delete tasks.
 - Organize tasks into projects.
@@ -46,9 +46,9 @@ Taskflow-AI/
 │   ├── PRODUCT_SPEC.md    # Product vision and MVP scope
 │   ├── ARCHITECTURE.md    # Current and proposed architecture
 │   └── ROADMAP.md         # Development stages
-├── .env.example
+├── assets/\n│   └── favicon.svg\n├── .github/\n│   ├── ISSUE_TEMPLATE/\n│   ├── workflows/\n│   └── pull_request_template.md\n├── docs/\n│   ├── ARCHITECTURE.md\n│   ├── PRODUCT_SPEC.md\n│   ├── ROADMAP.md\n│   └── USER_GUIDE.md\n├── .env.example
 ├── .gitignore
-├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md\n├── CONTRIBUTING.md
 ├── SECURITY.md
 └── package.json
 ```
