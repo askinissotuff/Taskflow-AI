@@ -1,50 +1,76 @@
 # TaskFlow AI
 
-**TaskFlow AI** is a concept for an AI-powered productivity platform designed to help people organize tasks, plan projects, and make steady progress without the complexity of heavyweight project-management software.
+**TaskFlow AI** is an early productivity-platform prototype for organizing tasks, managing projects, and breaking larger goals into practical next steps.
 
-> **Project status:** Early concept / planning stage. The features below describe the intended product direction; they are not claims about functionality already implemented in this repository.
+> **Project status:** This repository contains a working, browser-based prototype and planning documentation. It does not yet include user accounts, cloud sync, collaboration, or a real AI model. The planning assistant currently uses simple templates.
 
-## The problem
+## What you can try
 
-Basic to-do lists are often too limited for coordinating larger projects, while full project-management suites can feel overwhelming. TaskFlow AI aims to bridge that gap with a simpler workspace that can grow with the user's needs.
+- Create, complete, and delete tasks.
+- Organize tasks into projects.
+- Set task priority and an optional due date.
+- Search tasks and filter by active or completed status.
+- View overall and per-project completion progress.
+- Generate a sample step-by-step plan from a goal.
+- Keep demo data in your browser using local storage.
 
-## Who it is for
+## Run locally
 
-- **Students** organizing assignments, study plans, and deadlines.
-- **Teams and businesses** coordinating shared projects and responsibilities.
-- **Developers** tracking tasks, milestones, and project work.
-- **Independent creators** planning content and managing multiple ideas.
+**Requirements:** Node.js 18 or newer for the test command. The app itself is static and has no build step.
 
-## Planned capabilities
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/askinissotuff/Taskflow-AI.git
+   cd Taskflow-AI
+   ```
+2. Open `index.html` in a modern browser, or serve the folder with a local static server.
+3. Run the automated tests:
+   ```bash
+   npm test
+   ```
 
-- **Smart task organization** — group and prioritize work in a clear, manageable way.
-- **Project workspaces** — keep tasks, milestones, and related project information together.
-- **Planning assistance** — help users break larger goals into smaller actionable steps.
-- **Progress tracking** — make it easier to see what is complete and what needs attention.
-- **Integrations** — connect with commonly used tools as the product develops.
+No API key or environment setup is needed for the current prototype.
 
-These capabilities are proposed goals and may change as the project is developed.
+## Project structure
 
-## Why it matters
+```text
+Taskflow-AI/
+├── index.html             # App interface
+├── styles.css             # Responsive styling
+├── app.js                 # Browser interactions and local state
+├── src/
+│   └── core.js            # Reusable task and planning helpers
+├── tests/
+│   └── core.test.js       # Node.js unit tests
+├── docs/
+│   ├── PRODUCT_SPEC.md    # Product vision and MVP scope
+│   ├── ARCHITECTURE.md    # Current and proposed architecture
+│   └── ROADMAP.md         # Development stages
+├── .env.example
+├── .gitignore
+├── CONTRIBUTING.md
+├── SECURITY.md
+└── package.json
+```
 
-TaskFlow AI is intended to make productive workflows more approachable: less friction than complex project suites, with more structure and guidance than a simple checklist. The goal is to help individuals and groups spend less time organizing work and more time completing it.
+## Product direction
 
-## Roadmap
+TaskFlow AI aims to bridge the gap between basic to-do lists and heavyweight project-management software.
 
-1. Define the core user experience and product requirements.
-2. Choose the initial technology stack and application architecture.
-3. Build a small working prototype around tasks and project workspaces.
-4. Explore planning assistance and progress tracking.
-5. Evaluate integrations and gather feedback for future iterations.
+Intended audiences include students, small teams, developers, and independent creators. The longer-term product direction includes guided planning, project workspaces, progress tracking, and carefully designed integrations.
 
-## Repository
+Read the [product specification](docs/PRODUCT_SPEC.md), [architecture notes](docs/ARCHITECTURE.md), and [roadmap](docs/ROADMAP.md) for details. Planned features are not represented as completed functionality.
 
-This repository will contain the planning materials, source code, and documentation for TaskFlow AI as development progresses.
+## Data and privacy
+
+The prototype saves its sample tasks and projects in the current browser's local storage. This data does not sync to an account or another device. Avoid entering sensitive or confidential information. Clearing browser storage may remove the saved demo data.
+
+The planning helper is not connected to an AI provider. No API key is required, and secrets should never be placed in frontend code.
 
 ## Contributing
 
-Ideas, feedback, and suggestions are welcome. As the project takes shape, contribution guidelines and setup instructions will be added here.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and pull-request guidance. For security concerns, see [SECURITY.md](SECURITY.md).
 
 ## License
 
-A license has not been selected yet.
+No open-source license has been selected yet. Until one is added, the repository's contents are not automatically granted an open-source license.
