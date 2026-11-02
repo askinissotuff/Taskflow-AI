@@ -1,0 +1,17 @@
+{
+  "name": "TaskFlow AI",
+  "short_name": "TaskFlow",
+  "description": "A focused workspace for tasks, projects, and planning.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#10131d",
+  "theme_color": "#10131d",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
