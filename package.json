@@ -1,9 +1,10 @@
 {
   "name": "taskflow-ai",
-  "version": "0.2.0",
-  "description": "A browser-based workspace for organizing tasks, projects, and priorities.",
+  "version": "0.3.0",
+  "description": "A browser-based task workspace with a secure Claude-powered planning API.",
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "check": "node --check app.js && node --check src/core.js && node --check api/plan.js"
   },
   "engines": {
     "node": ">=18"
